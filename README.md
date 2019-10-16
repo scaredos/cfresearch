@@ -1,5 +1,5 @@
 # cfresearch
-A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, and Challenges.
+A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Challenges, and WAF.
 
 ## Challenge (Captcha)
 Cloudflare uses a script to provide access to the website while this rule is on. This is also how UAM works for CloudFlare. 
