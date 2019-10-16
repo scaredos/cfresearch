@@ -1,5 +1,6 @@
 # cfresearch
 A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Challenges, and WAF.
+This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS Attacks.
 
 ## Challenge (Captcha)
 - This is used for UAM (Under Attack Mode) and Challenge
