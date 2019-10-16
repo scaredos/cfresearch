@@ -26,6 +26,7 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 
 ## PHP Application w/ CloudFlare Bypass
 - The easiest target when attacking a website is the PHP pages. If you're server runs NGINX and PHP, then you're most likely vulnerable to this. If you get a `502 Bad Gateway` when your website gets hit, it's just a server error, nothing it wrong with your server. Either CloudFlare, or (most likely) your server's php queue is full. A simple `serivce php7.0-fpm restart` will fix it temporarily, but for a permanant fix, cache your PHP pages, setup limit_conn, proxy_cache, rate_limit, and other tools in NGINX's configuration for your php pages. Caching your PHP pages, then assuring the `cf-cache-status` is a `HIT`, will help your website take the attack and stop the 502 Gateway Errors.
+> To Patch: `Cache PHP Pages | RateLimit | Limit Connections`
 
 ## Cache Bypass
 - Cloudflare uses Edge servers to store cache and send requests to the webserver. If the server is caching pages such as HTML or PHP, or any content available via URI, you could send a `must-revalidate`query in your header to make the Cloudflare Edge server revalidate the cache and GET a new file regardless if the file has changed or not.
