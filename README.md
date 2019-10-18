@@ -29,8 +29,8 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 > To Patch: `Cache PHP Pages | RateLimit | Limit Connections`
 
 ## Cache Bypass
-- Cloudflare uses Edge servers to store cache and send requests to the webserver. If the server is caching pages such as HTML or PHP, or any content available via URI, you could send a `must-revalidate`query in your header to make the Cloudflare Edge server revalidate the cache and GET a new file regardless if the file has changed or not.
-> To Patch: `Remove must-revalidate or max-age from Cache-Control header`
+- Cloudflare uses Edge servers to store cache and send requests to the webserver. If the server is caching pages such as HTML or PHP, or any content available via URI, you could send a `must-revalidate` or `max-age=0` query in your header to make the Cloudflare Edge server revalidate or reinstate the cache and GET a new file regardless if the file has changed or not.
+> To Patch: `Remove must-revalidate or max-age from Cache-Control header and make CloudFlare reinstate the cache`
 
 ## Authentic Traffic
 - To get allowed access to cloudflare regularly, you need a CloudFlare User ID cookie, labeled `__cfduid`. These can be obtained by setting the bot to allow cookies and request a cookie. Some application will require a `PHPSESSID` cookie to obtain access also.
