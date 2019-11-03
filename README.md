@@ -36,7 +36,9 @@ With enough devices across enough locations with different ISPs and User Agents,
 
 ## Cache Bypass
 - Cloudflare uses Edge servers to store cache and send requests to the webserver. If the server is caching pages such as HTML or PHP, or any content available via URI, you could send a `must-revalidate` or `max-age=0` or `no-cache no-store` query in your header to make the Cloudflare Edge server revalidate or reinstate the cache and GET a new file regardless if the file has changed or not.
-> To Patch: `Remove must-revalidate or max-age from Cache-Control header and make CloudFlare reinstate the cache`
+- Another Cache Bypass method is random URI. Generating a random set of strings or integers and placing in the URL will bypass cached content (because it has never been loaded before). This is very effective as well, and with the script I uploaded (bypass.py), you can easily test this against your website if you have access to a server that will not ban you for DoS or have python install on your machine.
+> To Patch Pt.1: `Remove must-revalidate or max-age from Cache-Control header and make CloudFlare reinstate the cache`
+> To Patch Pt.2: `You must limit connections and make cloudflare cache the 404 page`
 
 ## Authentic Traffic
 - To get allowed access to cloudflare regularly, you need a CloudFlare User ID cookie, labeled `__cfduid`. These can be obtained by setting the bot to allow cookies and request a cookie. Some application will require a `PHPSESSID` cookie to obtain access also.
