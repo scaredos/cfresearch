@@ -3,7 +3,7 @@ A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Cha
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS Attacks.
 > Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666
 
-> Other Research: https://github.com/scaredos/l7research (Under Development)
+> Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 
 ## Layer7 DDoS Introduction
