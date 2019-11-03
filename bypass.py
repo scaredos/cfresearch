@@ -1,3 +1,7 @@
+# Uses a cache bypass method
+# pip install -U cfscrape
+# CFBypass DoS Script
+# SmallDoink#0666
 import cfscrape
 import random
 s = cfscrape.create_scraper()
