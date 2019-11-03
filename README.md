@@ -22,6 +22,10 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 `s=cloudflarecookie, jschl_vc=cookie, pass=randomint with last 5 rayid, jschl_answer=randomint`
 > To Patch: `Follow Steps at Bottom`
 
+## Raw Power (r/s)
+With enough devices across enough locations with different ISPs and User Agents, you could shut down a website by bypassing the cache servers. Most likely, the site you are hitting doesn't recieve global traffic from 1k devices in each third world country. CloudFlare's cache servers in those countries will not have the website stored, therefore bypassing the caching process of CloudFlare, leaving the target webserver vulnerable. Using raw power along with the "Cache Bypass" method is very effective.
+> To Patch: `Test your server weekly with CFBypass DDoS attacks. It will help the CloudFlare servers cache your content in small countries`
+
 ## Cloudscraper
 - Cloudscraper is a JavaScript module that makes requests to cloudflare
 - Cloudscraper is the most common way for bypasses now as it's easy to use since it's an external module. It follows all redirects which is needed for completely bypassing cloudflare.  Cloudscraper solves JSChallenges and reCaptcha challenges with ease and also supports Sucuri WAF Bypass, but that's for another day. Cloudscraper supports cookies and cache bypass, making DDoS more effective than normal. Cloudscraper also allows custom options on GET/POST request methods and reorders them accordingly. 
