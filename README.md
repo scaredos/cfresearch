@@ -5,6 +5,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
+## Update (CloudFlare News)
+Various captcha bypasses and javascript challenge bypasses were recently patched, but not all of them. Your site is now better protected with standard CloudFlare because of this update. Stay up to date on these patches by Staring or watching this repository. The captcha bypasses was fixed by Google, and their faults in client-side JavaScript serving. The same fix was done by CloudFlare non-publicly.
+
 
 ## Layer7 DDoS Introduction
 The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Attacks are far easier for the attacker to do since it can be done from a server with 1Gbps and a large proxy list. L7 attacks are more efficient in some cases for downing servers and making services unavailable. CloudFlare was built to stop these attacks, but like everything, it's not perfect. This was built to go over some of the known bypasses to bypass CloudFlare's WAF and DDoS prevention methods. CloudFlare is easy to bypass because their prevention methods are built in JavaScript and have easy math to create a token to access the site.
