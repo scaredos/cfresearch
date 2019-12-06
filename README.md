@@ -29,7 +29,14 @@ Most likely used for CloudFlare analytics or other forms of analytics
 `cdn-cgi/l/chk_captcha` Is the container for the script cloudflare uses. The script, written in PHP, gives the visitor temporary access to the website with cftokens and cookies. `/cdn-cgi/l/chk_captcha?s=&g-recaptcha-response=&cv_chal_result=%&cv_chal_fp=&bf_challenge_id=&bf_execution_time=&bf_result_hash=`is the full URI for the request to the captcha. By generating random data into the fields, you could bypass the Captcha page for usage in DDoS attacks, or for web crawling.
 > To Patch: `Follow Steps at Bottom`
 
-## JS Challenge
+## JS Challenge (NEW)
+- This is used for UAM (Under Attack Mode)
+- CloudFlare implements a "Browser Check" to generate a token for cloudflare clearance. Upon solving the JS Challenge, you are given a `__cfuid` cookie for CloudFlare Visitor Logging and `cf_clearance` to bypass the JS Challenge upon loading. The new URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer is stored in `/cdn-cgi/`. 
+- `POST` request with `jschl_vc:` which is the JS Challenge ID, `pass:` which is the "pass" for CloudFlare's server, and `jschl_answer:` which is the solution to the given JavaScript Challenge.
+CloudFlare is migrating it's challenges to new servers and URI's as attempts to block the bypasses, but it doesn't work, with me writing a script the same day as writing this.
+> To Patch: `Follow Steps at Bottom`
+
+## JS Challenge (Outdated Information)
 - This is the 5 second wait before loading webpage
 - Cloudflare also implements a script to 'check' the 'browser' as an attempt to stop ddos attacks. `dn-cgi/l/chk_jschl` Is the container for the script cloudflare uses. The script, written in php, gives the visitor full access to the website if a JS Challenge is implemented using cookies and tokens. `cdn-cgi/l/chk_jschl?s=&jschl_vc=&pass=jschl_answer=`
 `s=cloudflarecookie, jschl_vc=cookie, pass=randomint with last 5 rayid, jschl_answer=randomint`
