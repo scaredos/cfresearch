@@ -6,7 +6,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 ## Update (CloudFlare Captcha
-CloudFlare recently updated their Captcha, the new URL is `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. 
+CloudFlare recently updated their Captcha, the new URL is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
 
 
 ## Layer7 DDoS Introduction
@@ -15,7 +15,9 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 
 ## Challenge (Captcha) (NEW)
 - The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
-- The new method is `POST` to `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
+- The new method is `POST` to `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
+- In the `POST` requests, it includes an unknown `r:` parameter, `id:`, which is the visitor id, and `g-captcha-response:`, which is the Google Captcha Response from `https://www.google.com/recaptcha/api2/userverify?k=XXXXX` 
+The `r:` parameter is from `1300-1500` characters and randomly generated? (Currently unsure of usage)
 > To Patch: `Follow Steps at Bottom`
 
 ## Challenge (Captcha) (Outdated Information)
