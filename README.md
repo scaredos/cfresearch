@@ -33,7 +33,7 @@ Most likely used for CloudFlare analytics or other forms of analytics
 - This is used for UAM (Under Attack Mode)
 - CloudFlare implements a "Browser Check" to generate a token for cloudflare clearance. Upon solving the JS Challenge, you are given a `__cfuid` cookie for CloudFlare Visitor Logging and `cf_clearance` to bypass the JS Challenge upon loading. The new URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer is stored in `/cdn-cgi/`. 
 - `POST` request with `jschl_vc:` which is the JS Challenge ID, `pass:` which is the "pass" for CloudFlare's server, and `jschl_answer:` which is the solution to the given JavaScript Challenge.
-CloudFlare is migrating it's challenges to new servers and URI's as attempts to block the bypasses, but it doesn't work, with me writing a script the same day as writing this.
+CloudFlare has succesfully blocked the Python CloudFlare scraping module known as `cfscrape` from scraping pages behind UAM.
 > To Patch: `Follow Steps at Bottom`
 
 ## JS Challenge (Outdated Information)
