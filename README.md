@@ -6,7 +6,10 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 ## Update (CloudFlare Captcha & JS Challenge)
+As of 12/06/2019, nobody has a working CloudFlare UAM or Captcha Bypass 
+
 CloudFlare recently updated their Captcha, the new URI is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
+
 CloudFlare recently updated their JS Challenge, the new URI is `__cf_chl_jschl_tk__=GENERATED_TOKEN`
 
 
