@@ -18,6 +18,7 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 - The new method is `POST` to `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
 - In the `POST` requests, it includes an unknown `r:` parameter, `id:`, which is the visitor id, and `g-captcha-response:`, which is the Google Captcha Response from `https://www.google.com/recaptcha/api2/userverify?k=XXXXX` 
 The `r:` parameter is from `1300-1500` characters (normally) and includes the IP of the user and the request headers
+Most likely used for CloudFlare analytics or other forms of analytics
 > Partial Credit: https://syrinsecurity.net/ | Helped discover the usage of the `r:` parameter
 
 > To Patch: `Follow Steps at Bottom`
