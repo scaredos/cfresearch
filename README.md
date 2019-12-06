@@ -5,8 +5,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
-## Update (CloudFlare Captcha
-CloudFlare recently updated their Captcha, the new URL is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
+## Update (CloudFlare Captcha & JS Challenge)
+CloudFlare recently updated their Captcha, the new URI is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
+CloudFlare recently updated their JS Challenge, the new URI is `__cf_chl_jschl_tk__=GENERATED_TOKEN`
 
 
 ## Layer7 DDoS Introduction
