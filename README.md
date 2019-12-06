@@ -6,18 +6,24 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 ## Update (CloudFlare Captcha
-CloudFlare recently updated their Captcha, the new URL is `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. The old CloudFlare captcha will remain below while I research the new captcha technology.
+CloudFlare recently updated their Captcha, the new URL is `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. 
 
 
 ## Layer7 DDoS Introduction
 The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Attacks are far easier for the attacker to do since it can be done from a server with 1Gbps and a large proxy list. L7 attacks are more efficient in some cases for downing servers and making services unavailable. CloudFlare was built to stop these attacks, but like everything, it's not perfect. This was built to go over some of the known bypasses to bypass CloudFlare's WAF and DDoS prevention methods. CloudFlare is easy to bypass because their prevention methods are built in JavaScript and have easy math to create a token to access the site.
 - > NOTE: JS Challenge is the MOST common type of cloudflare bypass, since kids don't know about cloudscraper. Use a more efficent way of parsing real from fake traffic to prevent these attacks
 
-## Challenge (Captcha) (Outdated Information)
+## Challenge (Captcha) (NEW)
+- The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
+- The new method is `POST` to `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
+
+
+```## Challenge (Captcha) (Outdated Information)
 - This is used for UAM (Under Attack Mode) and Challenge
 - Cloudflare uses a script to provide access to the website while this rule is on. This is also how UAM works for CloudFlare. 
 `cdn-cgi/l/chk_captcha` Is the container for the script cloudflare uses. The script, written in PHP, gives the visitor temporary access to the website with cftokens and cookies. `/cdn-cgi/l/chk_captcha?s=&g-recaptcha-response=&cv_chal_result=%&cv_chal_fp=&bf_challenge_id=&bf_execution_time=&bf_result_hash=`is the full URI for the request to the captcha. By generating random data into the fields, you could bypass the Captcha page for usage in DDoS attacks, or for web crawling.
 > To Patch: `Follow Steps at Bottom`
+```
 
 ## JS Challenge
 - This is the 5 second wait before loading webpage
