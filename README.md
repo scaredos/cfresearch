@@ -16,14 +16,13 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 ## Challenge (Captcha) (NEW)
 - The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
 - The new method is `POST` to `?__cf_chl_captcha_tk__=CAPTCHA_RESULT`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
+> To Patch: `Follow Steps at Bottom`
 
-
-```## Challenge (Captcha) (Outdated Information)
+## Challenge (Captcha) (Outdated Information)
 - This is used for UAM (Under Attack Mode) and Challenge
 - Cloudflare uses a script to provide access to the website while this rule is on. This is also how UAM works for CloudFlare. 
 `cdn-cgi/l/chk_captcha` Is the container for the script cloudflare uses. The script, written in PHP, gives the visitor temporary access to the website with cftokens and cookies. `/cdn-cgi/l/chk_captcha?s=&g-recaptcha-response=&cv_chal_result=%&cv_chal_fp=&bf_challenge_id=&bf_execution_time=&bf_result_hash=`is the full URI for the request to the captcha. By generating random data into the fields, you could bypass the Captcha page for usage in DDoS attacks, or for web crawling.
 > To Patch: `Follow Steps at Bottom`
-```
 
 ## JS Challenge
 - This is the 5 second wait before loading webpage
