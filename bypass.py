@@ -1,4 +1,4 @@
-# Uses a cache bypass method
+# cfscrape blocked/patched by cloudflare 12/6/2019
 # pip install -U cfscrape
 # CFBypass DoS Script
 # SmallDoink#0666
