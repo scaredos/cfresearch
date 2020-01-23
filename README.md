@@ -5,6 +5,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
+> My Wesbite: https://projectkyros.com/ (DDoS Protected VPN)
+
 ## Update (CloudFlare Captcha & JS Challenge)
 As of 12/06/2019, nobody has a working CloudFlare UAM or Captcha Bypass 
 
@@ -23,7 +25,6 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 - In the `POST` requests, it includes an unknown `r:` parameter, `id:`, which is the visitor id, and `g-captcha-response:`, which is the Google Captcha Response from `https://www.google.com/recaptcha/api2/userverify?k=XXXXX` 
 The `r:` parameter is from `1300-1500` characters (normally) and includes the IP of the user and the request headers
 Most likely used for CloudFlare analytics or other forms of analytics
-> Partial Credit: https://syrinsecurity.net/ | Helped discover the usage of the `r:` parameter
 
 > To Patch: `Follow Steps at Bottom`
 
