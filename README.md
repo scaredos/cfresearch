@@ -8,7 +8,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > My Wesbite: https://projectkyros.com/ (DDoS Protected VPN)
 
 ## Updated (Privacy Pass)
-Previously, Privacy Pass was abused to bypass the Captcha page for CloudFlare. CloudFlare noticed the issue and cleared the issue for Privacy Pass abuse. 
+Previously, Privacy Pass was abused to bypass the Captcha page for CloudFlare. CloudFlare noticed the issue and cleared the issue for Privacy Pass abuse. Privacy Pass, being a great help to the community and using tokens recieved from solving one challenge and passing them to new captchas. Learn more at https://privacypass.github.io/
 
 ## Update (CloudFlare Captcha & JS Challenge)
 As of 12/06/2019, nobody has a working CloudFlare UAM or Captcha Bypass 
@@ -21,7 +21,7 @@ CloudFlare recently updated their JS Challenge, the new URI is `__cf_chl_jschl_t
 
 ## Layer7 DDoS Introduction
 The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Attacks are far easier for the attacker to do since it can be done from a server with 1Gbps and a large proxy list. L7 attacks are more efficient in some cases for downing servers and making services unavailable. CloudFlare was built to stop these attacks, but like everything, it's not perfect. This was built to go over some of the known bypasses to bypass CloudFlare's WAF and DDoS prevention methods. CloudFlare is easy to bypass because their prevention methods are built in JavaScript and have easy math to create a token to access the site.
-- > NOTE: JS Challenge is the MOST common type of cloudflare bypass, since kids don't know about cloudscraper. Use a more efficent way of parsing real from fake traffic to prevent these attacks
+- > NOTE: JS Bypasses are the most common since they are the easiest to create and use.
 
 ## Challenge (Captcha) (NEW)
 - The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
@@ -56,7 +56,7 @@ With enough devices across enough locations with different ISPs and User Agents,
 > To Patch: `Test your server weekly with CFBypass DDoS attacks. It will help the CloudFlare servers cache your content in small countries`
 
 ## Cloudscraper
-- Cloudscraper is a JavaScript module that makes requests to cloudflare
+- Cloudscraper is a module that makes requests to cloudflare
 - Cloudscraper is the most common way for bypasses now as it's easy to use since it's an external module. It follows all redirects which is needed for completely bypassing cloudflare.  Cloudscraper solves JSChallenges and reCaptcha challenges with ease and also supports Sucuri WAF Bypass, but that's for another day. Cloudscraper supports cookies and cache bypass, making DDoS more effective than normal. Cloudscraper also allows custom options on GET/POST request methods and reorders them accordingly. 
 
 ## PHP Application w/ CloudFlare Bypass
