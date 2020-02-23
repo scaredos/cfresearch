@@ -7,8 +7,12 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > My Wesbite: https://projectkyros.com/ (DDoS Protected VPN)
 
+## Updated (Privacy Pass)
+Previously, Privacy Pass was abused to bypass the Captcha page for CloudFlare. CloudFlare noticed the issue and cleared the issue for Privacy Pass abuse. 
+
 ## Update (CloudFlare Captcha & JS Challenge)
 As of 12/06/2019, nobody has a working CloudFlare UAM or Captcha Bypass 
+Update: Working CloudFlare UAM as of 1/05/2020
 
 CloudFlare recently updated their Captcha, the new URI is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
 
