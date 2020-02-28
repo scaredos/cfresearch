@@ -25,10 +25,8 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 
 ## Challenge (Captcha) (NEW)
 - The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
-- The new method is `POST` to `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 year after the cookie was given and is valid for over 100k requests or until CloudFlare forces you to captcha again.
-- In the `POST` requests, it includes an unknown `r:` parameter, `id:`, which is the visitor id, and `g-captcha-response:`, which is the Google Captcha Response from `https://www.google.com/recaptcha/api2/userverify?k=XXXXX` 
-The `r:` parameter is from `1300-1500` characters (normally) and includes the IP of the user and the request headers
-Most likely used for CloudFlare analytics or other forms of analytics
+- The new method is `POST` to `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 day after the cookie was given and is valid for over 1k requests or until CloudFlare forces you to captcha again.
+- The form data for the POST request is 'r', which was discovered to be used for analytics by CloudFlare, 'cf_captcha_kind', which indicates which captcha the user solved, 'id', the visitor id, and 'g-recaptcha-response', which is the solved captcha response
 
 > To Patch: `Follow Steps at Bottom`
 
@@ -48,7 +46,7 @@ CloudFlare has succesfully blocked the Python CloudFlare scraping module known a
 ## JS Challenge (Outdated Information)
 - This is the 5 second wait before loading webpage
 - Cloudflare also implements a script to 'check' the 'browser' as an attempt to stop ddos attacks. `dn-cgi/l/chk_jschl` Is the container for the script cloudflare uses. The script gives the visitor full access to the website if a JS Challenge is implemented using cookies and tokens. `cdn-cgi/l/chk_jschl?s=&jschl_vc=&pass=jschl_answer=`
-`s=cloudflarecookie, jschl_vc=cookie, pass=randomint with last 5 rayid, jschl_answer=randomint`
+`r=cloudflarecookie, jschl_vc=cookie, pass=randomint with last 5 rayid, jschl_answer=randomint`
 > To Patch: `Follow Steps at Bottom`
 
 ## Raw Power (r/s)
