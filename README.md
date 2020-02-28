@@ -1,7 +1,7 @@
 # cfresearch
 A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Challenges, and WAF.
-This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS Attacks.
-> Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666 | https://instagram.com/flxonx
+This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS attacks.
+> Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
@@ -57,8 +57,8 @@ With enough devices across enough locations with different ISPs and User Agents,
 - Cloudscraper is a module that makes requests to cloudflare
 - Cloudscraper is the most common way for bypasses now as it's easy to use since it's an external module. It follows all redirects which is needed for completely bypassing cloudflare.  Cloudscraper solves JSChallenges and reCaptcha challenges with ease and also supports Sucuri WAF Bypass, but that's for another day. Cloudscraper supports cookies and cache bypass, making DDoS more effective than normal. Cloudscraper also allows custom options on GET/POST request methods and reorders them accordingly. 
 
-## PHP Application w/ CloudFlare Bypass
-- The easiest target when attacking a website is the PHP pages. If you're server runs NGINX and PHP, then you're most likely vulnerable to this. If you get a `502 Bad Gateway` when your website gets hit, it's just a server error, nothing it wrong with your server. Either CloudFlare, or (most likely) your server's php queue is full. A simple `serivce php7.0-fpm restart` will fix it temporarily, but for a permanant fix, cache your PHP pages, setup limit_conn, proxy_cache, rate_limit, and other tools in NGINX's configuration for your php pages. Caching your PHP pages, then assuring the `cf-cache-status` is a `HIT`, will help your website take the attack and stop the 502 Gateway Errors.
+## NGINX PHP Application w/ CloudFlare Bypass
+- The easiest target when attacking a website is the PHP pages. If you're server runs NGINX and PHP, then you're most likely vulnerable to this. If you get a `502 Bad Gateway` when your website gets hit, it's just a server error, nothing is wrong with your server. Either CloudFlare, or (most likely) your server's PHP queue is full. A simple `service php7.0-fpm restart` will fix it temporarily, but for a permanant fix, cache your PHP pages, setup limit_conn, proxy_cache, rate_limit, and other tools in NGINX's configuration for your php pages. Caching your PHP pages, then assuring the `cf-cache-status` is a `HIT`, will help your website take the attack and stop the 502 Gateway Errors.
 > To Patch: `Cache PHP Pages | RateLimit | Limit Connections`
 
 ## Cache Bypass
@@ -69,7 +69,7 @@ With enough devices across enough locations with different ISPs and User Agents,
 > To Patch Pt.2: `You must limit connections and make cloudflare cache the 404 page`
 
 ## Authentic Traffic
-- To get allowed access to cloudflare regularly, you need a CloudFlare User ID cookie, labeled `__cfduid`. These can be obtained by setting the bot to allow cookies and request a cookie. Some application will require a `PHPSESSID` cookie to obtain access also.
+- To get allowed access to cloudflare regularly, you need a CloudFlare User ID cookie, labeled `__cfduid`. These can be obtained by setting the bot to allow cookies and request a cookie.
 > Patch: Limit Traffic To Webserver | RateLimiting | Limit Connections | Kill Connections
 
 ## Patching Layer7 Attacks
