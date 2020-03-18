@@ -1,11 +1,10 @@
 # cfresearch
 A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Challenges, and WAF.
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS attacks.
-> Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666
+> Contact Me: https://t.me/trespassed
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
-> My Wesbite: https://projectkyros.com/ (DDoS Protected VPN)
 
 ## Updated (Privacy Pass)
 Previously, Privacy Pass was abused to bypass the Captcha page for CloudFlare. CloudFlare noticed the issue and cleared the issue for Privacy Pass abuse. Learn more at https://privacypass.github.io/
