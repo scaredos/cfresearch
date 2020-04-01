@@ -6,7 +6,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 ## Update (CloudFlare Captcha)
-CloudFlare now uses hCaptcha instead of reCaptcha. The URI has not changed, but the post data has. This disables support for Privacy Pass since it is not the Google Captcha. hCaptcha is a replacement for other Captcha challenges which advertises itself as a way for website owners to earn money from blocking bots. hCaptcha uses the users input to train machine learning models and neural networks.
+CloudFlare now uses hCaptcha instead of reCaptcha. The URI has not changed, but the post data has. This disables support for Privacy Pass since it is not the Google Captcha. hCaptcha is a replacement for other Captcha challenges which advertises itself as a way for website owners to earn money from blocking bots. hCaptcha uses the users input to train machine learning models and neural networks, making the businesses that own the machine models pay.
 
 `r`: Logging information (Not Required)
 
