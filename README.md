@@ -5,17 +5,13 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
-
-## Updated (Privacy Pass)
-Previously, Privacy Pass was abused to bypass the Captcha page for CloudFlare. CloudFlare noticed the issue and cleared the issue for Privacy Pass abuse. Learn more at https://privacypass.github.io/
-
-## Update (CloudFlare Captcha & JS Challenge)
-CloudFlare UAM and Captcha can both be bypassed. 
-
-CloudFlare recently updated their Captcha, the new URI is `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. 
-
-CloudFlare recently updated their JS Challenge, the new URI is `__cf_chl_jschl_tk__=GENERATED_TOKEN`
-
+## Update (CloudFlare Captcha)
+CloudFlare now uses hCaptcha instead of reCaptcha. The URI has not changed, but the post data has. This disables support for Privacy Pass since it is not the Google Captcha. hCaptcha is a replacement for other Captcha challenges which advertises itself as a way for website owners to earn money from blocking bots. hCaptcha uses the users input to train machine learning models and neural networks.
+`r`: Logging information (Not Required)
+`cf_captcha_kind`: 'h' or 're' (hCaptcha or reCaptcha)
+`id`: ID of the request
+`g-recaptcha-response`: Response of the hCaptcha
+`h-recaptcha-response`: Response of the hCaptcha
 
 ## Layer7 DDoS Introduction
 The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Attacks are far easier for the attacker to do since it can be done from a server with 1Gbps and a large proxy list. L7 attacks are more efficient in some cases for downing servers and making services unavailable. CloudFlare was built to stop these attacks, but like everything, it's not perfect. This was built to go over some of the known bypasses to bypass CloudFlare's WAF and DDoS prevention methods. CloudFlare is easy to bypass because their prevention methods are built in JavaScript and have easy math to create a token to access the site.
@@ -24,7 +20,7 @@ The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Att
 ## Challenge (Captcha) (NEW)
 - The new CloudFlare captcha was introduced recently in part of an attempt to block Layer7 DoS attacks
 - The new method is `POST` to `?__cf_chl_captcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to bypass captcha, to the accepted device and, as usual, a `__cfuid` cookie stating the CloudFlare visitor id. The `cf_clearance` expires 1 day after the cookie was given and is valid for over 1k requests or until CloudFlare forces you to captcha again.
-- The form data for the POST request is 'r', which was discovered to be used for analytics by CloudFlare, 'cf_captcha_kind', which indicates which captcha the user solved, 'id', the visitor id, and 'g-recaptcha-response', which is the solved captcha response
+- The form data for the POST request is 'r', which was discovered to be used for analytics by CloudFlare, 'cf_captcha_kind', which indicates which captcha the user solved, 'id', the visitor id, 'g-recaptcha-response', which is the hCaptcha response or reCaptcha response, and 'h-recaptcha-response', which is the hCaptcha response or reCaptcha response.
 
 > To Patch: `Follow Steps at Bottom`
 
