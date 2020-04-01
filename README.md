@@ -5,7 +5,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
-## Update (CloudFlare Captcha)
+## Update (CloudFlare uses hCaptcha)
 CloudFlare now uses hCaptcha instead of reCaptcha. The URI has not changed, but the post data has. This disables support for Privacy Pass since it is not the Google Captcha. hCaptcha is a replacement for other Captcha challenges which advertises itself as a way for website owners to earn money from blocking bots. hCaptcha uses the users input to train machine learning models and neural networks, making the businesses that own the machine models pay.
 
 `r`: Logging information (Not Required)
@@ -18,8 +18,8 @@ CloudFlare now uses hCaptcha instead of reCaptcha. The URI has not changed, but 
 
 `h-recaptcha-response`: Response of the hCaptcha
 
-## Layer7 DDoS Introduction
-The common Layer7 DDoS attack are quite easy to pull off and perfect. Layer7 Attacks are far easier for the attacker to do since it can be done from a server with 1Gbps and a large proxy list. L7 attacks are more efficient in some cases for downing servers and making services unavailable. CloudFlare was built to stop these attacks, but like everything, it's not perfect. This was built to go over some of the known bypasses to bypass CloudFlare's WAF and DDoS prevention methods. CloudFlare is easy to bypass because their prevention methods are built in JavaScript and have easy math to create a token to access the site.
+## CloudFlare DDoS Introduction
+The common Layer7 DDoS attack are quite easy to pull off and most of the time work perfectly. In this write-up, I will explain features of CloudFlare and methods attackers use to (D)DoS your website. If your website is being (D)DoSed and you use CloudFlare, you have incorrectly configured CloudFlare. CloudFlare's network is not perfect and has some issues, but is excellent for handling (D)DoS attacks like this. By default, CloudFlare protects you from Layer 4 attacks by proxying all of your traffic through their servers. Down below I mention some ways to stop your website from being attacked.
 - > NOTE: JS Bypasses are the most common since they are the easiest to create and use.
 
 ## Challenge (Captcha) (NEW)
@@ -52,9 +52,6 @@ CloudFlare has succesfully blocked the Python CloudFlare scraping module known a
 With enough devices across enough locations with different ISPs and User Agents, you could shut down a website by bypassing the cache servers. Most likely, the site you are hitting doesn't recieve global traffic from 1k devices in each third world country. CloudFlare's cache servers in those countries will not have the website stored, therefore bypassing the caching process of CloudFlare, leaving the target webserver vulnerable. Using raw power along with the "Cache Bypass" method is very effective.
 > To Patch: `Test your server weekly with CFBypass DDoS attacks. It will help the CloudFlare servers cache your content in small countries`
 
-## Cloudscraper
-- Cloudscraper is a module that makes requests to cloudflare
-- Cloudscraper is the most common way for bypasses now as it's easy to use since it's an external module. It follows all redirects which is needed for completely bypassing cloudflare.  Cloudscraper solves JSChallenges and reCaptcha challenges with ease and also supports Sucuri WAF Bypass, but that's for another day. Cloudscraper supports cookies and cache bypass, making DDoS more effective than normal. Cloudscraper also allows custom options on GET/POST request methods and reorders them accordingly. 
 
 ## NGINX PHP Application w/ CloudFlare Bypass
 - The easiest target when attacking a website is the PHP pages. If you're server runs NGINX and PHP, then you're most likely vulnerable to this. If you get a `502 Bad Gateway` when your website gets hit, it's just a server error, nothing is wrong with your server. Either CloudFlare, or (most likely) your server's PHP queue is full. A simple `service php7.0-fpm restart` will fix it temporarily, but for a permanant fix, cache your PHP pages, setup limit_conn, proxy_cache, rate_limit, and other tools in NGINX's configuration for your php pages. Caching your PHP pages, then assuring the `cf-cache-status` is a `HIT`, will help your website take the attack and stop the 502 Gateway Errors.
@@ -67,14 +64,9 @@ With enough devices across enough locations with different ISPs and User Agents,
 
 > To Patch Pt.2: `You must limit connections and make cloudflare cache the 404 page`
 
-## Authentic Traffic
-- To get allowed access to cloudflare regularly, you need a CloudFlare User ID cookie, labeled `__cfduid`. These can be obtained by setting the bot to allow cookies and request a cookie.
-> Patch: Limit Traffic To Webserver | RateLimiting | Limit Connections | Kill Connections
-
 ## Patching Layer7 Attacks
 - Patching Layer7 Attacks can be hard, but with proper setup, can be very easy. First, start by ensuring visitor IP's. This can be done in both Apache and Nginx by using a cloudflare module to log the visitor ip, instead of cloudflare's IP. Second, setup ratelimiting for the website and install fail2ban to help enforce and jail the ratelimiting offenders. Third, block ASNs  that are known for DDoS Attacks, such as ChinaNet, and various Backbones of eastern countries such as China, Japan, and Russia. (Note: Blocking ASNs can Block some real user traffic) A very easy patch can be to cache the pages and force cloudflare to serve these files, rather than your webserver serving the files. 
 
-- If you are getting targetted by a person individually, they are probably stupid. Look for patterns in their attack, such as proxies, spoofed IPs, UserAgents, IP Ranges, IP ASNs, etc. Usually, attackers do not randomize this data and leave this data available in the headers. Setup a firewall rule to block this common feature of the attacks, such as a common user agent, or common proxy server. This can take a huge load off your webserver and put it on cloudflare. Cloudflare's network is built for that kind of stress, so let cloudflare do its job.
-
+- Look for patterns in attacka, such as proxies, spoofed IPs, UserAgents, IP Ranges, IP ASNs, etc. Usually, attackers do not randomize this data creating an easier way to stop the attack. Setup firewall rules to block the common features of the attacks, such as a common user agents, or a proxy server. This can take a huge load off your webserver and put it on cloudflare. Cloudflare's network is built for large requests.
 
 
