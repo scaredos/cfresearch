@@ -1,7 +1,7 @@
 # cfresearch
 This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, Captcha Challenges, and CloudFlare WAF.
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
-> Contact Me: https://t.me/trespassed | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
+> Contact Me: [Telegram](https://t.me/trespassed) | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
 
 ## Privacy Pass w/ hCaptcha
 CloudFlare has switched from reCaptcha to hCaptcha. hCaptcha now supports Privacy Pass. Head to https://www.hcaptcha.com/privacy-pass and claim 5 tokens each time you solve.
