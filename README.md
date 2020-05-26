@@ -3,8 +3,27 @@ This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, C
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
 > Contact Me: [Telegram](https://t.me/trespassed) | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
 
-## Privacy Pass w/ hCaptcha
-CloudFlare has switched from reCaptcha to hCaptcha. hCaptcha now supports Privacy Pass. Head to https://www.hcaptcha.com/privacy-pass and claim 5 tokens each time you solve.
+
+## New JS Challenge
+- This is used for UAM (Under Attack Mode)
+- CloudFlare implements a "Browser Check" to generate a token for CloudFlare clearance. Upon solving the JS Challenge, the solver is given a `__cfuid` cookie stating the CloudFlare visitor ID, a `cf_clearance` cookie to freely load the website with another challenge, a `__cf_bm` cookie, and a `cf_chl_seq_challenge-number-here`. The URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer `/cdn-cgi/`.
+
+`r`: CloudFlare Analytics (Not required to solve challenge)
+
+`jschl_vc`: Identity of CloudFlare JS challenge
+
+`jschl_answer`: JavaScript challenge solution
+
+`pass`: Used in solving JavaScript Challenge
+
+`cf_ch_verify`: `plat`
+
+### JS Challenge Generation
+- To generate a JavaScript challenge through CloudFlare, the browser will send a POST request to `cdn-cgi/challenge-platform/generate/ov1/..CloudFlare RAY ID.../...CloudFlare Challenge Sequence...
+- The CloudFlare Challenege Sequence is given by the challenge, sending the request will tell your browser to set the cookie. Failing the said challenge gives your browser a new cookie, the `cf_chal_retry=c` will tell CloudFlare to send you another challenge
+- The CloudFlare Challenge Sequence number is then given to you in a cookie named `cf_chl_1=` that is equal to the sequence number. 
+
+- An example URI looks like `https://example.com/cdn-cgi/challenge-platform/generate/ov1/599aceb96f6373f1/35fde4ae886667b/`.
 
 ## CloudFlare hCaptcha Challenge
 The URI has not changed, but the POST data has. hCaptcha is the replacement for reCaptcha. hCaptcha uses the users input to train machine learning modles and neural networks, making the businesses that own the models pay the website owner.
@@ -19,21 +38,11 @@ The URI has not changed, but the POST data has. hCaptcha is the replacement for 
 
 `h-captcha-response`: Response of hCaptcha or reCaptcha
 
+
 ## Captcha Challenge
 - The new CloudFlare captcha challenge was introduced early this year in an attempt to stop the CloudFlare "bypasses".
 - The new method is `POST` to `?__cf_chl_catpcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to freely load the website without the captcha, and a `__cfuid` cookie stating the CloudFlare visitor ID. 
 
-## JS Challenge
-- This is used for UAM (Under Attack Mode)
-- CloudFlare implements a "Browser Check" to generate a token for CloudFlare clearance. Upon solving the JS Challenge, the solver is given a `__cfuid` cookie stating the CloudFlare visitor ID and a `cf_clearance` cookie to freely load the website with another challenge. The URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer `/cdn-cgi/`.
-
-`r`: CloudFlare Analytics (Not required to solve challenge)
-
-`jschl_vc`: Identity of CloudFlare JS challenge
-
-`jschl_answer`: JavaScript challenge solution
-
-`pass`: Used in solving JavaScript Challenge
 
 ## Attacks through CloudFlare
 - Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit from your server, as you will just ratelimit CloudFlare's requests. For starters, you should try caching the webpage. Do not cache any pages that require authentication such as a dashboard and a login or signup form. Caching the webpage will take load off of your server and put it onto the CloudFlare network, minimizing the network traffic to your server. Argo Smart Routing can increase the load time and also help with attacks. Argo Smart Routing reduces the requests to the web server.
