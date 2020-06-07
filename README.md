@@ -3,8 +3,18 @@ This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, C
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
 > Contact Me: [Telegram](https://t.me/trespassed) | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
 
+## New UAM Default
+- CloudFlare has implemented a follow up after solving the JS Challenge for some users. CloudFlare now requires you to solve a captcha after solving the JS Challenge when the user has UAM enabled. For the first challenge, CloudFlare has introduced these two new items
+- New Cookie
+`cf_chl_1`: `id-of-challenge`
 
-## New JS Challenge
+- New Form Data
+`cf_ch_cp_return`: `id-goes-here|{"follow_up":"captcha"}`
+
+- If there is not a `cf_ch_cp_return` item in the form data, there is no follow up Captcha. 
+
+
+## JS Challenge
 - This is used for UAM (Under Attack Mode)
 - CloudFlare implements a "Browser Check" to generate a token for CloudFlare clearance. Upon solving the JS Challenge, the solver is given a `__cfuid` cookie stating the CloudFlare visitor ID, a `cf_clearance` cookie to freely load the website with another challenge, a `__cf_bm` cookie, and a `cf_chl_seq_challenge-number-here`. The URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer `/cdn-cgi/`.
 
@@ -17,6 +27,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 `pass`: Used in solving JavaScript Challenge
 
 `cf_ch_verify`: `plat`
+
 
 ### JS Challenge Generation
 - To generate a JavaScript challenge through CloudFlare, the browser will send a POST request to `cdn-cgi/challenge-platform/generate/ov1/..CloudFlare RAY ID.../...CloudFlare Challenge Sequence...
