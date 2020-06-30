@@ -13,8 +13,28 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 - If there is not a `cf_ch_cp_return` item in the form data, there is no follow up Captcha. 
 
+## New JS Challenge
+- The new UAM Challenge
+- The first request is `POST` to `/cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here`
+with the POST data of v_`ray-id-goes-here`: `encoded information for challenge` and with the cookies `__cf_bm`, `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Ray ID). The request replies with the JavaScript chalelnge and the cookie `cf_chl_seq_ray-id-goes-here`.
+- The second request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie.
+- The final request (If there is no follow up captcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATED TOKEN` with the form data of 
 
-## JS Challenge
+`r`: CloudFlare Analytics (Not Required to solve challenge)
+
+`jschl_vc`: Identity of CloudFlare JS Challenge
+
+`jschl_answer`: JavaScript Challenge Solution
+
+`pass`: Used in solving JavaScript Challenge
+
+`cf_ch_verify`: `plat`
+
+`cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
+
+
+
+## Old JS Challenge
 - This is used for UAM (Under Attack Mode)
 - CloudFlare implements a "Browser Check" to generate a token for CloudFlare clearance. Upon solving the JS Challenge, the solver is given a `__cfuid` cookie stating the CloudFlare visitor ID, a `cf_clearance` cookie to freely load the website with another challenge, a `__cf_bm` cookie, and a `cf_chl_seq_challenge-number-here`. The URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer `/cdn-cgi/`.
 
@@ -28,13 +48,6 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 `cf_ch_verify`: `plat`
 
-
-### JS Challenge Generation
-- To generate a JavaScript challenge through CloudFlare, the browser will send a POST request to `cdn-cgi/challenge-platform/generate/ov1/..CloudFlare RAY ID.../...CloudFlare Challenge Sequence...
-- The CloudFlare Challenege Sequence is given by the challenge, sending the request will tell your browser to set the cookie. Failing the said challenge gives your browser a new cookie, the `cf_chal_retry=c` will tell CloudFlare to send you another challenge
-- The CloudFlare Challenge Sequence number is then given to you in a cookie named `cf_chl_1=` that is equal to the sequence number. 
-
-- An example URI looks like `https://example.com/cdn-cgi/challenge-platform/generate/ov1/599aceb96f6373f1/35fde4ae886667b/`.
 
 ## CloudFlare hCaptcha Challenge
 The URI has not changed, but the POST data has. hCaptcha is the replacement for reCaptcha. hCaptcha uses the users input to train machine learning modles and neural networks, making the businesses that own the models pay the website owner.
