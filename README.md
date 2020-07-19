@@ -15,10 +15,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 ## New JS Challenge
 - The new UAM Challenge
-- The first request is `POST` to `/cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here`
-with the POST data of v_`ray-id-goes-here`: `encoded information for challenge` and with the cookies `__cf_bm`, `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Ray ID). The request replies with the JavaScript chalelnge and the cookie `cf_chl_seq_ray-id-goes-here`.
+- The first request is `POST` to `cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here/cf_chl_1 cookie-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The second request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie.
-- The final request (If there is no follow up captcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATED TOKEN` with the form data of 
+- The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of 
 
 `r`: CloudFlare Analytics (Not Required to solve challenge)
 
@@ -31,22 +30,6 @@ with the POST data of v_`ray-id-goes-here`: `encoded information for challenge` 
 `cf_ch_verify`: `plat`
 
 `cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
-
-
-
-## Old JS Challenge
-- This is used for UAM (Under Attack Mode)
-- CloudFlare implements a "Browser Check" to generate a token for CloudFlare clearance. Upon solving the JS Challenge, the solver is given a `__cfuid` cookie stating the CloudFlare visitor ID, a `cf_clearance` cookie to freely load the website with another challenge, a `__cf_bm` cookie, and a `cf_chl_seq_challenge-number-here`. The URI is `?__cf_chl_jschl_tk__=GENERATED_TOKEN` and no longer `/cdn-cgi/`.
-
-`r`: CloudFlare Analytics (Not required to solve challenge)
-
-`jschl_vc`: Identity of CloudFlare JS challenge
-
-`jschl_answer`: JavaScript challenge solution
-
-`pass`: Used in solving JavaScript Challenge
-
-`cf_ch_verify`: `plat`
 
 
 ## CloudFlare hCaptcha Challenge
