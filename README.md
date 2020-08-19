@@ -13,6 +13,26 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 - If there is not a `cf_ch_cp_return` item in the form data, there is no follow up Captcha. 
 
+## New Captcha Challenge
+- CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/orchestrate/captcha/v1` as you would with a JavaScript challenge.
+- The second request is `POST` to `cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here/cf_chl_1 cookie-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
+- The final request is to `?__cf_chl_captcha_tk__=` with the form data of:
+
+`r`: CloudFlare Analytics
+
+`cf_catpcha_kind`: 'h' or 're' (hCaptcha or reCaptcha)
+
+`vc`: Identity of CloudFlare JS Challenge
+
+`captcha_vc`: Identity of CloudFlare Captcha Challenge
+
+`captcha_answer`: hCaptcha Captcha Answer
+
+`cf_ch_verify`: `plat`
+
+`h-captcha-response`: `captchka`
+
+
 ## New JS Challenge
 - The new UAM Challenge
 - The first request is `GET` to `cdn-cgi/challenge-platform/orchestrate/jsch/v1` which replies with javascript to generate the challenege id and make the second request
@@ -33,24 +53,6 @@ This was built for educational purposes such as learning how CloudFlare works, h
 `cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
 
 - The final request then replies with a `cf_clearance` cookie that has an unknown value (mostly likely used in logging requests)
-
-## CloudFlare hCaptcha Challenge
-The URI has not changed, but the POST data has. hCaptcha is the replacement for reCaptcha. hCaptcha uses the users input to train machine learning modles and neural networks, making the businesses that own the models pay the website owner.
-
-`r`: CloudFlare Analytics (Not required to solve challenge)
-
-`cf_catpcha_kind`: 'h' or 're' (hCaptcha or reCaptcha)
-
-`id`: CloudFlare's ID of the request
-
-`g-captcha-response`: Response of hCaptcha or reCaptcha
-
-`h-captcha-response`: Response of hCaptcha or reCaptcha
-
-
-## Captcha Challenge
-- The new CloudFlare captcha challenge was introduced early this year in an attempt to stop the CloudFlare "bypasses".
-- The new method is `POST` to `?__cf_chl_catpcha_tk__=GENERATED_TOKEN`. It hands a `cf_clearance` cookie, allowing the user to freely load the website without the captcha, and a `__cfuid` cookie stating the CloudFlare visitor ID. 
 
 
 ## Attacks through CloudFlare
