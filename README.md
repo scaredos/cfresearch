@@ -3,7 +3,10 @@ This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, C
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
 > Contact Me: [Telegram](https://t.me/trespassed) | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
 
-## New UAM Captcha Follow Up
+## New Cookie with UAM
+- CloudFlare has recently introduced a new cookie required to solve their challenges. The `cf_chl_prog` cookie which is provided at the generation of a challenge. Once you solve the challenge, you are provided 2 digits to add to the end of the cookie. A sample value would look like `a19`.
+
+## UAM Captcha Follow Up
 - CloudFlare has implemented a follow up after solving the JS Challenge for some users. CloudFlare now requires you to solve a captcha after solving the JS Challenge when the user has UAM enabled. For the first challenge, CloudFlare has introduced these two new items
 - New Cookie
 `cf_chl_1`: `id-of-challenge`
@@ -13,14 +16,14 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 - If there is not a `cf_ch_cp_return` item in the form data, there is no follow up Captcha. 
 
-## New Captcha Challenge
+## Captcha Challenge
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/orchestrate/captcha/v1` as you would with a JavaScript challenge.
 - The second request is `POST` to `cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here/cf_chl_1 cookie-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The final request is to `?__cf_chl_captcha_tk__=` with the form data of:
 
 `r`: CloudFlare Analytics
 
-`cf_catpcha_kind`: 'h' or 're' (hCaptcha or reCaptcha)
+`cf_captcha_kind`: 'h' or 're' (hCaptcha or reCaptcha)
 
 `vc`: Identity of CloudFlare JS Challenge
 
@@ -32,9 +35,10 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 `h-captcha-response`: `captchka`
 
+- After sending the request to `?__cf_chl_captcha_tk__`, you are given a new cf_clearance cookie. Everytime you send a request with valid information to said URI, you are provided a new cf_clearance cookie regardless of the status of your previous cookie.
 
-## New JS Challenge
-- The new UAM Challenge
+
+## JS Challenge
 - The first request is `GET` to `cdn-cgi/challenge-platform/orchestrate/jsch/v1` which replies with javascript to generate the challenege id and make the second request
 - The second request is `POST` to `cdn-cgi/challenge-platform/generate/ov1/generated-challenge-id-goes-here/cloudflare-ray-id-goes-here/cf_chl_1 cookie-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The third request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie.
