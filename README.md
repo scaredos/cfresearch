@@ -5,6 +5,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 ## New Cookie with UAM
 - CloudFlare has recently introduced a new cookie required to solve their challenges. The `cf_chl_prog` cookie which is provided at the generation of a challenge. Once you solve the challenge, you are provided 2 digits to add to the end of the cookie. A sample value would look like `a19`.
+- Another cookie CloudFlare introduced is the `cf_chl_rc_ni` cookie, which usually only contains a single digit like `1`. As of now, it is unaware of wether or not it is required to solve the challenge.
 
 ## UAM Captcha Follow Up
 - CloudFlare has implemented a follow up after solving the JS Challenge for some users. CloudFlare now requires you to solve a captcha after solving the JS Challenge when the user has UAM enabled. For the first challenge, CloudFlare has introduced these two new items
