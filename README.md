@@ -3,19 +3,7 @@ This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, C
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
 > Contact Me: [Telegram](https://t.me/trespassed) | The old information is at [OLD.md](https://github.com/scaredos/cfresearch/blob/master/OLD.md)
 
-## New Cookie with UAM
-- CloudFlare has recently introduced a new cookie required to solve their challenges. The `cf_chl_prog` cookie which is provided at the generation of a challenge. Once you solve the challenge, you are provided 2 digits to add to the end of the cookie. A sample value would look like `a19`.
-- Another cookie CloudFlare introduced is the `cf_chl_rc_ni` cookie, which usually only contains a single digit like `1`. As of now, it is unaware of wether or not it is required to solve the challenge.
-
-## UAM Captcha Follow Up
-- CloudFlare has implemented a follow up after solving the JS Challenge for some users. CloudFlare now requires you to solve a captcha after solving the JS Challenge when the user has UAM enabled. For the first challenge, CloudFlare has introduced these two new items
-- New Cookie
-`cf_chl_1`: `id-of-challenge`
-
-- New Form Data
-`cf_ch_cp_return`: `id-goes-here|{"follow_up":"captcha"}`
-
-- If there is not a `cf_ch_cp_return` item in the form data, there is no follow up Captcha. 
+> Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
 
 ## Captcha Challenge
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/orchestrate/captcha/v1` as you would with a JavaScript challenge.
