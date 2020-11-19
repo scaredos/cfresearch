@@ -1,2 +1,2 @@
-* linguist-vendored
-* linguist-vendored=false
+scripts/* linguist-vendored
+
