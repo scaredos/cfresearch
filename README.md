@@ -7,8 +7,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 > Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
 
 ## Captcha Challenge
-- CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/orchestrate/h/b/captcha/v1` as you would with a JavaScript challenge.
-- The second request is `POST` to `cdn-cgi/challenge-platform/h/b/generate/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
+- CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/h/g/orchestrate/captcha/v1` as you would with a JavaScript challenge.
+- The second request is `POST` to `cdn-cgi/challenge-platform/h/g/generate/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The final request is to `?__cf_chl_captcha_tk__=` with the form data of:
 
 `r`: CloudFlare Analytics
@@ -29,8 +29,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 
 ## JS Challenge
-- The first request is `GET` to `cdn-cgi/challenge-platform/h/b/orchestrate/jsch/v1` which replies with javascript to generate the challenege id and make the second request
-- The second request is `POST` to `cdn-cgi/challenge-platform/h/b/generate/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
+- The first request is `GET` to `cdn-cgi/challenge-platform/h/g/orchestrate/jsch/v1` which replies with javascript to generate the challenege id and make the second request
+- The second request is `POST` to `cdn-cgi/challenge-platform/h/g/generate/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here` with the POST data of `v_ray-id-goes-here`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The third request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie.
 - The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of 
 
