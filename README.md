@@ -6,7 +6,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
 
-> Other relevant CloudFlare projects [CloudProxy](https://github.com/scaredos/cloudproxy) [cfbypass](https://github.com/scaredos/cfbypass)
+> Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
 ## Captcha Challenge
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `/cdn-cgi/challenge-platform/h/g/orchestrate/captcha/v1` as you would with a JavaScript challenge.
