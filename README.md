@@ -2,7 +2,7 @@
 This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, Captcha Challenges, and CloudFlare WAF.
 
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
-> Contact Me: [Telegram](https://t.me/pelicans) [Email](mailto:scared@tuta.io)
+> Contact Me: [Telegram](https://t.me/pelicans) or [Email](mailto:scared@tuta.io)
 
 > Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
 
