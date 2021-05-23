@@ -56,9 +56,14 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - For starters, you should try caching the webpage. Do not cache any pages that are dynamic to the user (login, signup, dashboard). Caching the webpage will take load off of your server and put it onto the CloudFlare network, minimizing the network traffic to your server. Argo Smart Routing can increase the load time and also help with attacks.
 - If you cannot cache the content on the webpage, try CloudFlare workers to deliver dynamic content to visitors or Railgun to decrease the size of the response for dynamic content. You can combine ESI with CloudFlare workers to cache some content on a dyanmic page, decreasing the load on your webserver.
 
-## Random URI in the attack
-- Free CloudFlare cannot do much against this, but Business plans can, you can create a regexp that matches all URI on your website, and create a firewall rule to match them. With a rule such as `(not http.request.full_uri matches "(\/)([a-z]){0,12}\w|(-)([a-z]){0,12}\w(\/)|([a-z]){0,12}\w")`, you can block every request where the URI contains a number and directories with strings longer than 12 lowercase characters.
+## Random Directory Attack
+- Free CloudFlare cannot do much against this, but Business plans can, you can create a regexp that matches all URI on your website, and create a firewall rule to match them.
+  - (Example:  `(http.request.full_uri matches "(\/)([a-z]){0,12}\w|(-)([a-z]){0,12}\w(\/)|([a-z]){0,12}\w")`)
+  - You can block every request where the URI contains a number and directories with strings longer than 12 lowercase characters with no hyphens (For best results).
 
-## Patching the attacks
-- CloudFlare can only do so much to block attacks. If the attack is large enough, there is probably nothing CloudFlare can do about this attack. With residential proxies, constantly chaning user-agents, and other randomized attributes that prevent CloudFlare from fingerprinting requests/devices and apply mitigation or an IP jail.
-- Look for patterns in the attacks, such as proxies (hosting), user agents, ip ranges/asn, headers, URI. Usually this data is randomized by using a proxy pool or list and generating pseudo-random user agents and URI/query string to abuse. If it is a specific ASN such as Digital Ocean being abused, require a Catpcha challenge to that ASN and it should drop the attack. Most attacks can only "bypass" the JavaScript challenge as solving the Captcha challenge requires a paid service or a unqiue bypass.
+## Mitigating attacks
+- There may be times where CloudFlare does not block an attack, and it is most likely for good reasons. When CloudFlare doesn't block an attack, it's usually because it looks like legitmate traffic. To stop this, you can configure your CloudFlare firewall rules, cache, and page rules to handle an event like this.
+- You can use the firewall to send a captcha challenge to any IP with an ASN that matches that of major hosting companies (Google, Digital Ocean, Choopa, etc.). You can also block unknown bots, and turn on `Bot Fight Mode`.
+- You can cache all of your static content, such as landing pages, that do not change based on the user. This will heavily protect your server against attacks that target those pages.
+- With page rules, you can set `Origin Cache Control` -> `On` and `Cache Level` -> `Cache Everything` to have your web server manage which files to cache.
+  - Advanced developers, who can interact with CloudFlare's API within your web application, may create an `IP List` with the corresponding account, and have those IPs be allowed to access dynamic content with no challenge. Those who are not in that list should receive some form of challenge (For logins, use JS, and make your login a static page, for other content use Captcha).
