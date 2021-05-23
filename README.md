@@ -2,8 +2,6 @@
 This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, Captcha Challenges, and CloudFlare WAF.
 
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
-> Contact Me: [Telegram](https://t.me/pelicans) or [Email](mailto:scared@tuta.io)
-
 > Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
@@ -36,7 +34,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - The first request is `GET` to `BASEURL/orchestrate/jsch/v1?ray=RAYID` which replies with javascript to generate the challenege id and make the second request (to solve the challenge)
 - The second request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/unknown-string` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The third request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
-- The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of 
+- The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of
 
 `r`: CloudFlare Analytics (Not Required to solve challenge)
 
@@ -54,9 +52,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 
 ## Attacks through CloudFlare
-- Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit CloudFlare's IPs, but to ratelimit from your webserver, you can start by `restoring visitor's IPs` then apply a firewall rule to ratelimit HTTP requests. 
+- Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit CloudFlare's IPs, but to ratelimit from your webserver, you can start by `restoring visitor's IPs` then apply a firewall rule to ratelimit HTTP requests.
 - For starters, you should try caching the webpage. Do not cache any pages that are dynamic to the user (login, signup, dashboard). Caching the webpage will take load off of your server and put it onto the CloudFlare network, minimizing the network traffic to your server. Argo Smart Routing can increase the load time and also help with attacks.
-- If you cannot cache the content on the webpage, try CloudFlare workers to deliver dynamic content to visitors or Railgun to decrease the size of the response for dynamic content. You can combine ESI with CloudFlare workers to cache some content on a dyanmic page, decreasing the load on your webserver. 
+- If you cannot cache the content on the webpage, try CloudFlare workers to deliver dynamic content to visitors or Railgun to decrease the size of the response for dynamic content. You can combine ESI with CloudFlare workers to cache some content on a dyanmic page, decreasing the load on your webserver.
 
 ## Random URI in the attack
 - Free CloudFlare cannot do much against this, but Business plans can, you can create a regexp that matches all URI on your website, and create a firewall rule to match them. With a rule such as `(not http.request.full_uri matches "(\/)([a-z]){0,12}\w|(-)([a-z]){0,12}\w(\/)|([a-z]){0,12}\w")`, you can block every request where the URI contains a number and directories with strings longer than 12 lowercase characters.
