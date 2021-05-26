@@ -2,7 +2,7 @@
 This repository contains my research from CloudFlare's AntiDDoS, JS Challenge, Captcha Challenges, and CloudFlare WAF.
 
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare challenges, and how to prevent attacks that are bypassing CloudFlare.
-> Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts)
+> Location to [CloudFlare Scripts](https://github.com/scaredos/cfresearch/tree/master/scripts) - Credits to [devgianlu](https://github.com/devgianlu/cloudflare-bypass)
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
