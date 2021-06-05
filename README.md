@@ -6,10 +6,33 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
+
+
+## JS Challenge
+- Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
+- The first request is `GET` to `BASEURL/orchestrate/jsch/v1?ray=RAYID` which replies with javascript to generate the challenege id and make the second request (to solve the challenge)
+- The second request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf-challenge`, which contains the challenge id. The request replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
+- The third request is `POST` to the same URI with the same POST data and headers but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
+- The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of
+
+`r`: CloudFlare Analytics (Not Required to solve challenge)
+
+`jschl_vc`: Identity of CloudFlare JS Challenge
+
+`jschl_answer`: JavaScript Challenge Solution
+
+`pass`: Used in solving JavaScript Challenge
+
+`cf_ch_verify`: `plat`
+
+`cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
+
+- The final request then replies with a `cf_clearance` cookie that has an unknown value (mostly likely used in logging requests)
+
 ## Captcha Challenge
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `BASEURL/orchestrate/captcha/v1?ray=:rayid` as you would with a JavaScript challenge.
-- The send and third is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/unknown-string` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
+-  The second and third request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf-challenge`, which contains the challenge id. The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
 - The final request is to `?__cf_chl_captcha_tk__=` with the form data of:
 
 `r`: CloudFlare Analytics
@@ -27,29 +50,6 @@ This was built for educational purposes such as learning how CloudFlare works, h
 `h-captcha-response`: `captchka`
 
 - After sending the request to `?__cf_chl_captcha_tk__`, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
-
-
-## JS Challenge
-- Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
-- The first request is `GET` to `BASEURL/orchestrate/jsch/v1?ray=RAYID` which replies with javascript to generate the challenege id and make the second request (to solve the challenge)
-- The second request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/unknown-string` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID), and `cf_chl_1` (CloudFlare Challenge 1 ID). The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
-- The third request is `POST` to the same URI with the same POST data but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
-- The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of
-
-`r`: CloudFlare Analytics (Not Required to solve challenge)
-
-`jschl_vc`: Identity of CloudFlare JS Challenge
-
-`jschl_answer`: JavaScript Challenge Solution
-
-`pass`: Used in solving JavaScript Challenge
-
-`cf_ch_verify`: `plat`
-
-`cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
-
-- The final request then replies with a `cf_clearance` cookie that has an unknown value (mostly likely used in logging requests)
-
 
 ## Attacks through CloudFlare
 - Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit CloudFlare's IPs, but to ratelimit from your webserver, you can start by `restoring visitor's IPs` then apply a firewall rule to ratelimit HTTP requests.
