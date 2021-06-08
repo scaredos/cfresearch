@@ -9,6 +9,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 ## Firewall Update (Managed Clearance)
 - CloudFlare has introduced a new system which affects the firewall rules, and it is named "managed clearance". This new utility allows an easier usage for your users, but less security in regards to your in place firewall rules.
 - Manage clearance allows your users to only solve one challenge, for a set amount of time, that clears them from all of your firewall rules (except rules where the outcome is Block). This means that if you have a JS challenge for one rule and a captcha as another, if the user completes the JS challenge, they are free to traverse your website without seeing the captcha challenge.
+- However, this is based on threat score as well, if they match one block rule, or have a high threat score, this does not apply to them.
 
 
 
