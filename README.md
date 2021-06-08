@@ -6,6 +6,10 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
+## Firewall Update (Managed Clearance)
+- CloudFlare has introduced a new system which affects the firewall rules, and it is named "managed clearance". This new utility allows an easier usage for your users, but less security in regards to your in place firewall rules.
+- Manage clearance allows your users to only solve one challenge, for a set amount of time, that clears them from all of your firewall rules (except rules where the outcome is Block). This means that if you have a JS challenge for one rule and a captcha as another, if the user completes the JS challenge, they are free to traverse your website without seeing the captcha challenge.
+
 
 
 ## JS Challenge
@@ -49,7 +53,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 `h-captcha-response`: `captchka`
 
-`cf_ch_cp_return`: `<unknown-string>|{"managed_clearance":"i"}`. The purpose of this is unknown, but it indicates some form of managed clearance, possibly defined by the website's configuration (the length of time allowed for clearance). 
+`cf_ch_cp_return`: `<unknown-string>|{"managed_clearance":"i"}`. This is apart of CloudFlare's new managed clearance system, which is defined more above.
 
 
 - After sending the request to `?__cf_chl_captcha_tk__`, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
