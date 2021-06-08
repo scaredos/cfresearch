@@ -49,6 +49,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 `h-captcha-response`: `captchka`
 
+`cf_ch_cp_return`: `<unknown-string>|{"managed_clearance":"i"}`. The purpose of this is unknown, but it indicates some form of managed clearance, possibly defined by the website's configuration (the length of time allowed for clearance). 
+
+
 - After sending the request to `?__cf_chl_captcha_tk__`, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
 ## Attacks through CloudFlare
