@@ -20,6 +20,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - The third request is `POST` to the same URI with the same POST data and headers but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
 - The final request (If there is no follow up catpcha) is a `POST` request to `?__cf_chl_jschl_tk__=GENERATEd TOKEN` with the form data of
 
+`md`: Usage is unknown at this time (Appears to be unique to every challenge)
+
 `r`: CloudFlare Analytics (Not Required to solve challenge)
 
 `jschl_vc`: Identity of CloudFlare JS Challenge
