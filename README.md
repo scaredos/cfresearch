@@ -32,7 +32,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 `cf_ch_verify`: `plat`
 
-`cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}"` (This is now included in the form data, it is why UAM now makes you follow up with a Captcha Challenge)
+`cf_ch_cp_return`: `"ID OF CAPTCHA CHALLENGE|{\"follow_up\":\"captcha\"}` (JS Challenge -> Captcha)
+
 
 - The final request then replies with a `cf_clearance` cookie that has an unknown value (mostly likely used in logging requests)
 
@@ -41,6 +42,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `BASEURL/orchestrate/captcha/v1?ray=:rayid` as you would with a JavaScript challenge.
 -  The second and third request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf-challenge`, which contains the challenge id. The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
 - The final request is to `?__cf_chl_captcha_tk__=` with the form data of:
+
+`md`: Usage is unknown at this time (Appears to be unique to every challenge)
 
 `r`: CloudFlare Analytics
 
