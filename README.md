@@ -6,9 +6,9 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
-## New Firewall Configuration
-- CloudFlare has implemented systems which trigger managed (captcha) challenges upon UAM solve. Bypassesers Beware! 
-- CloudFlare nows gives users control over the response to a predefined set of HTTP DDoS traffic samples (DDoS Managed Rules).
+## Challenge Information (Revisited)
+- Any failed (fradulent) "final" request to solve a challenge results in a HTTP 400 response from any portion of the CF challenge, regardless of information validity, leading to the challenge restarting. 
+- Referer headers should be set automatically and used accordingly to have the best chance at solving any challenge and not being detected as a bot (by new bot detection methods). 
 
 ## JS Challenge
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
