@@ -15,7 +15,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - The first request is `GET` to `BASEURL/orchestrate/jsch/v1?ray=:rayid` which replies with javascript to generate the challenege id and make the second request (to solve the challenge)
 - The second request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge info. The request replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
 - The third request is `POST` to the same URI with the same POST data and headers but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
-- The final request is `POST` request to the target URL.
+- The final request is `POST` request to the target URL with form data of the challenge information.
 
 - After sending the final request, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
@@ -24,7 +24,7 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `BASEURL/orchestrate/managed/v1?ray=` as you would with a JavaScript challenge.
 -  The second and third request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge information. The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
-- The final request is `POST` request to the target URL.
+- The final request is `POST` request to the target URL with form data of the challenge information.
 
 - After sending the final request, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
