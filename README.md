@@ -6,6 +6,8 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
+> NEW! [Bot Detection Research](https://github.com/scaredos/bot-detection) & [Bot Detection Avoidance Research](https://github.com/scaredos/detection-avoidance)
+
 ## Challenge Information (Revisited)
 - Any failed (fradulent) "final" request to solve a challenge results in a HTTP 400 response from any portion of the CF challenge, regardless of information validity, leading to the challenge restarting. 
 - Referer headers should be set automatically and used accordingly to have the best chance at solving any challenge and not being detected as a bot (by new bot detection methods). 
