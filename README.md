@@ -22,13 +22,14 @@ This was built for educational purposes such as learning how CloudFlare works, h
 - After sending the final request, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
 
-## Captcha Challenge
+## Managed Challenge
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
 - CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `BASEURL/orchestrate/managed/v1?ray=` as you would with a JavaScript challenge.
 -  The second and third request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge information. The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
+-  New GET request to `cdn-cgi/challenge-platform/h/g/pat/cloudflare-ray-id-goes-here/unknown-variable/unknown-variable/unknown-variable`. This responds with a `www-authenticate` header, providing challenge information labelled `PrivateToken`. Another request is then sent to the `/flow/ov1/` URL. 
 - The final request is `POST` request to the target URL with form data of the challenge information.
 
-- After sending the final request, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
+- After sending the final request, you are given a new `cf_clearance` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
 ## Attacks through CloudFlare
 - Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit CloudFlare's IPs, but to ratelimit from your webserver, you can start by `restoring visitor's IPs` then apply a firewall rule to ratelimit HTTP requests.
