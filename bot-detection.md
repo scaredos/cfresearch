@@ -1,5 +1,5 @@
 # bot-detection
-This was compiled for educational purposes (to help further people in their attempts to block bots on their websites). This is not a full resource and contains only information which I have discovered.
+This was compiled for educational purposes (to help further people in their attempts to block bots on their websites). This is not a full resource and contains only information which I have discovered. (This is seperate from CloudFlare Research)
 
 ## Chromedriver/Automated Chromium detections
 - Various methods can be used to detect chromedriver & automated Chromium.
