@@ -6,30 +6,23 @@ This was built for educational purposes such as learning how CloudFlare works, h
 
 > Other relevant CloudFlare projects [[CloudProxy](https://github.com/scaredos/cloudproxy)] [[cfbypass](https://github.com/scaredos/cfbypass)]
 
-> NEW! [Bot Detection Research](https://github.com/scaredos/cfresearch/blob/master/bot-detection.md)
 
 ## Challenge Information (Revisited)
 - Any failed (fradulent) "final" request to solve a challenge results in a HTTP 400 response from any portion of the CF challenge, regardless of information validity, leading to the challenge restarting. 
 - Referer headers should be set automatically and used accordingly to have the best chance at solving any challenge and not being detected as a bot (by new bot detection methods). 
 
-## JS Challenge
+
+
+## Managed Challenge (JS)
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
 - The first request is `GET` to `BASEURL/orchestrate/jsch/v1?ray=:rayid` which replies with javascript to generate the challenege id and make the second request (to solve the challenge)
-- The second request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge info. The request replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
-- The third request is `POST` to the same URI with the same POST data and headers but with the added cookie. The request replies with `cf_chl_rc_ni` cookie and the new header `cf-chal-out`, which is encoded or compressed.
+- The second request is `POST` to `BASEURL/flow/ov1/unknown_here:time_epoch_here:unknown_here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge info. The request replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`.
+- The third request is `POST` to `BASEURL/pat/ray-id-here/epoch_time/unknown/unknown`. Replies with www-authenticate header.
+- The fourth request is `POST` to the same URI with the same POST data and headers but with the added cookie. The request replies with `cf_chl_out` cookie and the new header `cf-chl-out-s`, which are encoded or compressed.
 - The final request is `POST` request to the target URL with form data of the challenge information.
 
-- After sending the final request, you are given a new `cf_clearance` cookie and `cf_chl_prog=a9` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
+- After sending the final request, you are given a new `cf_clearance` cookie cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
-
-## Managed Challenge
-- Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
-- CloudFlare now requires you to also solve a JavaScript challenge in addition to the Captcha challenge, submitting them both at the same time, the first request is to `BASEURL/orchestrate/managed/v1?ray=` as you would with a JavaScript challenge.
--  The second and third request is `POST` to `BASEURL/flow/ov1/generated-challenge-id-goes-here:cf_chl_1 cookie-here/cloudflare-ray-id-goes-here/cf-challenge-id` with the POST data of `v_rayid`: `encoded information for the challenge` with the cookies `__cfuid` (CloudFlare Request ID),  `cf_chl_1` (CloudFlare Challenge 1 ID), and the new header `cf_chl_out` and `cf_chl_out_s`, which contains encoded/encrypted challenge information. The requst replies with the JavaScript challenge and the cookie `cf_chl_seq_ cf-chl-1-cookie-goes-here`. This request provides the cookie `cf_chl_rc_ni`. It also now inclues request header `cf-challenge: :challenge-id:'
--  New GET request to `cdn-cgi/challenge-platform/h/g/pat/cloudflare-ray-id-goes-here/unknown-variable/unknown-variable/unknown-variable`. This responds with a `www-authenticate` header, providing challenge information labelled `PrivateToken`. Another request is then sent to the `/flow/ov1/` URL. 
-- The final request is `POST` request to the target URL with form data of the challenge information.
-
-- After sending the final request, you are given a new `cf_clearance` cookie. Everytime you send a request with valid information to said URI, you are provided a new `cf_clearance` cookie regardless of the status of your previous cookie.
 
 ## Attacks through CloudFlare
 - Most commonly, if you're website is being attacked while you have CloudFlare active, it's most likely a misconfiguration on your end. Do not ratelimit CloudFlare's IPs, but to ratelimit from your webserver, you can start by `restoring visitor's IPs` then apply a firewall rule to ratelimit HTTP requests.
