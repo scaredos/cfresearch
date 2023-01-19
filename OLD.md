@@ -1,9 +1,6 @@
 # cfresearch
 A repository containing my research from CloudFlare's AntiDDoS, JSChallenge, Challenges, and WAF.
 This was built for educational purposes such as learning how CloudFlare works, how to bypass CloudFlare, and how to prevent L7 DDoS attacks.
-> Contact Me: https://t.me/trespassed
-
-> Other Research: https://github.com/scaredos/l7research (Not Finished, Finishing CloudFlare research first)
 
 ## Privacy Pass Update
 hCaptcha now supports Privacy Pass. Head to https://www.hcaptcha.com/privacy-pass and claim 5 tokens. Clicking the hCaptcha button on any website will now use one of the tokens and solve the captcha challenge.
