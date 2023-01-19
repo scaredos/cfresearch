@@ -1,6 +1,5 @@
 # CloudFlare Magic Transit 
 This is a list of current ways to "bypass" CloudFlare's magic transit. This should only be used to mitigate the attacks and not to harm any servers.
-> Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666
 
 ## Update (9/01/2020)
 - CloudFlare released FlowTrackd on (7/14/2020) which as not proven to be of any use towards DDoS attacks such as TCP reflection or standard spoofed floods.
