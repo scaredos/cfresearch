@@ -1,6 +1,5 @@
 ## Layer4 CloudFlare Bypass
 - Ways to bypass CloudFlare and obtain origin server ip
-> Contact Me: https://twitter.com/FuckBinary | https://t.me/trespassed | SmallDoink#0666
 
 ## DNS Record A
 - One common way of attempting to find the origin server IP is through active DNS records. The 'A' Record holds the Origin server IP, if it's not a CloudFlare IP. 
