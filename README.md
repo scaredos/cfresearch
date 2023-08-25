@@ -13,20 +13,27 @@ This was built for educational purposes such as learning how Cloudflare works, h
 
 ## Managed Challenge
 - Base URL: `/cdn-cgi/challenge-platform/h/b` OR `/cdn-cgi/challenge-platform/h/g`
-- The first request is `GET` to `BASEURL/orchestrate/managed/v1?ray=${rayid}` 
+- The first request is `GET` to `BASEURL/orchestrate/chl_page/v1?ray=${rayid}` 
     - This replies with javascript to generate the challenege id and make the second request (to solve the challenge)
 - The second request is `POST` to `BASEURL/flow/ov1/${unknown_here}:${unix_epoch}:${unknown_here}/${ray-id}/${cf-challenge-id}` with the POST data of `v_${rayid}`: `encoded information for the challenge` and header `cf-challenge`. 
-    - The request replies with header `cf_chl_gen`.
-- The third request is `GET` to `BASEURL/img/${ray-id}/${unix_epoch}/unknown`.
-    - The request replies with an image (possibly containing encoded information). 
-- The fourth request is `GET` to `BASEURL/pat/${ray-id}/${unix_epoch}/unknown/unknown`
-    - This replies with `www-authenticate` header
+    - The request replies with header `Cf-Chl-Gen`.
+- The third request is `GET` to `
+https://challenges.cloudflare.com/{BASEURL}/turnstile/if/ov2/av0/unknown/0/unknown/unknown/theme(dark)/normal`
+    - For Turnstile captcha challenge
+- The fourth request is `POST` to 2nd URL
+    - This replies with `Cf-Chl-Gen` header
+- The fifth and sixths request is `POST` to:
+    - 5th: `https://challenges.cloudflare.com/{BASEURL}/flow/ov1/${unknown_here}:${unix_epoch}:${unknown_here}/${ray-id}/${cf-challenge-id}`with the POST data of `v_${rayid}`: `encoded information for the challenge` and header `Cf-Challenge`.
+    - 6th: `https://DOMAIN/{BASEURL}/flow/ov1/${unknown_here}:${unix_epoch}:${unknown_here}/${ray-id}/${cf-challenge-id}`with the POST data of `v_${rayid}`: `encoded information for the challenge` and header `Cf-Challenge`.
+    - These both include the referer header of the turnstile URL
 - The final request is `POST` to target url with POST DATA:
     - `md`: Analytic data
     - `sh`: Challenge processing
     - `aw`: Challenge processing
     - `cf_ch_cp_return`: `unknown|{"managed_clearance":"ni"}`
     - After sending the final request, you are given a new `cf_clearance` cookie.
+ 
+> Please be aware there is an unknown timeout (60+ seconds) for turnstile captcha in which clearance is automatically granted!!
 
 
 ## Random Directory Attack
